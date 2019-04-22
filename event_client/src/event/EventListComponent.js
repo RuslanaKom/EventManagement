@@ -11,10 +11,8 @@ const EventLineComponent = (props) => {
 
     var urlForDetails = props.event.links.filter(l=>l.rel=='details')[0];
     var urlForFavourite = props.event.links.filter(l=>l.rel=='favourite')[0];
-    var urlForUnFavourite = props.event.links.filter(l=>l.rel=='unfavourite')[0];
     var urlForBuying = props.event.links.filter(l=>l.rel=='buy')[0]? props.event.links.filter(l=>l.rel=='buy')[0]:null;
-    var urlForGetFeedback = props.event.links.filter(l=>l.rel=='getfeedback')[0];
-    var urlForPostFeedback = props.event.links.filter(l=>l.rel=='postfeedback')[0];
+    var urlForFeedback = props.event.links.filter(l=>l.rel=='feedback')[0];
 
     var priceDiv=<p>Bilieto kaina: {props.event.event.basicPrice} Eur.</p>
 
@@ -24,7 +22,7 @@ const EventLineComponent = (props) => {
                 Pirkti bilietą
             </Tooltip>
         }>
-            <button onClick={()=>props.handleBuyOrFavourite(urlForBuying)} type="button" className="btn btn-link">
+            <button onClick={()=>props.handleBuy(urlForBuying)} type="button" className="btn btn-link">
                 <Icon color='blue' size='large' name='shopping cart'/>
             </button>
         </OverlayTrigger>;
@@ -55,7 +53,7 @@ const EventLineComponent = (props) => {
                     Užmiršti
                 </Tooltip>
             }>
-                <button onClick={() => {props.handleBuyOrFavourite(urlForUnFavourite);
+                <button onClick={() => {props.handleFavouriteRemove(urlForFavourite);
                    document.activeElement.style.color="green"}}
                         type="button" className="btn btn-link">
                     <Icon id="faveouriteIcon" color='red' size='large' name='heart'/>
@@ -69,7 +67,7 @@ const EventLineComponent = (props) => {
                     Įsiminti
                 </Tooltip>
             }>
-                <button onClick={() => props.handleBuyOrFavourite(urlForFavourite)}
+                <button onClick={() => props.handleFavouriteAdd(urlForFavourite)}
                         type="button" className="btn btn-link">
                     <Icon id="faveouriteIcon" color='grey' size='large' name='heart'/>
                 </button>
@@ -86,8 +84,7 @@ const EventLineComponent = (props) => {
             feedbackDiv = <Link to={{
                 pathname: '/feedback',
                 state: {
-                    urlForGetFeedback: urlForGetFeedback,
-                    urlForPostFeedback: urlForPostFeedback,
+                    urlForFeedback: urlForFeedback,
                     eventName: props.event.event.name
                 }
             }}>Atsiliepimai</Link>

@@ -22,13 +22,28 @@ public class EventResource extends ResourceSupport {
 			add(linkTo(EventController.class).slash(id).slash("buy").withRel("buy"));
 		}
 		add(linkTo(EventController.class).slash(id).slash("favourite").withRel("favourite"));
-		add(linkTo(EventController.class).slash(id).slash("unfavourite").withRel("unfavourite"));
 		add(linkTo(methodOn(EventController.class).getEventWithDetails(id)).withRel("details"));
-		add(linkTo(EventController.class).slash(id).slash("feedback").withRel("postfeedback"));
-		add(linkTo(EventController.class).slash(id).slash("allfeedback").withRel("getfeedback"));
+		add(linkTo(EventController.class).slash(id).slash("feedback").withRel("feedback"));
 	}
 
 	public Event getEvent() {
 		return event;
 	}
 }
+
+
+
+
+
+
+
+
+
+/*
+ * 		add(linkTo(EventController.class).slash(id).slash("favourite").withRel("favourite"));
+		add(linkTo(EventController.class).slash(id).slash("unfavourite").withRel("unfavourite"));
+		add(linkTo(methodOn(EventController.class).getEventWithDetails(id)).withRel("details"));
+		add(linkTo(EventController.class).slash(id).slash("feedback").withRel("postfeedback"));
+		add(linkTo(EventController.class).slash(id).slash("allfeedback").withRel("getfeedback"));
+ * 
+ * */

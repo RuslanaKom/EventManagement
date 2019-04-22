@@ -7,9 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,19 +67,7 @@ public class EventController {
 	public  @ResponseBody Event getEventById(@PathVariable Long id) {
 		return  eventService.getEventById(id);
 	}
-	
-	@GetMapping(value = "/{id}/buy", produces = "application/json")
-	public  @ResponseBody Ticket buyEventTicket(@PathVariable Long id, @RequestParam Long userId) {
-		Event event =  eventService.getEventById(id);
-		User user = userService.findUserById(userId).get(0);
-		return ticketService.buyTicket(event, user);
-	}
-	
-	@GetMapping(value = "/{id}/details", produces = "application/json")
-	public  @ResponseBody EventDto getEventWithDetails(@PathVariable Long id) {
-		EventDto event =  eventService.getFullEvent(id);
-		return event;
-	}
+
 	
 	@GetMapping(value = "/", produces = "application/hal+json")
 	public @ResponseBody List<EventResource> getEventsByCriteria(@RequestParam(required = false) Optional<String> name,
@@ -90,7 +80,26 @@ public class EventController {
 		return events.stream().map(e -> new EventResource(e)).collect(Collectors.toList());
 	}
 	
-	@GetMapping(value = "/{id}/favourite", produces = "application/json")
+	/*________DETAILS__________*/
+	
+	@GetMapping(value = "/{id}/details", produces = "application/json")
+	public  @ResponseBody EventDto getEventWithDetails(@PathVariable Long id) {
+		EventDto event =  eventService.getFullEvent(id);
+		return event;
+	}
+	
+	/*_________TICKET__________*/
+	
+	@PostMapping(value = "/{id}/buy", produces = "application/json")
+	public  @ResponseBody Ticket buyEventTicket(@PathVariable Long id, @RequestParam Long userId) {
+		Event event =  eventService.getEventById(id);
+		User user = userService.findUserById(userId).get(0);
+		return ticketService.buyTicket(event, user);
+	}
+	
+	 /*________FAVOURITES________*/
+	
+	@PutMapping(value = "/{id}/favourite", produces = "application/json")
 	public  @ResponseBody ResponseEntity saveEventToFavourite(@PathVariable Long id, @RequestParam Long userId) {
 		Event event =  eventService.getEventById(id);
 		User user = userService.findUserById(userId).get(0);
@@ -98,7 +107,7 @@ public class EventController {
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 	
-	@GetMapping(value = "/{id}/unfavourite", produces = "application/json")
+	@DeleteMapping(value = "/{id}/favourite", produces = "application/json")
 	public  @ResponseBody ResponseEntity deleteEventFromFavourite(@PathVariable Long id, @RequestParam Long userId) {
 		Event event =  eventService.getEventById(id);
 		User user = userService.findUserById(userId).get(0);
@@ -106,6 +115,8 @@ public class EventController {
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 
+	 /*_________FEEDBACK_________*/
+	
 	@PostMapping(value = "/{id}/feedback", produces = "application/json")
 	public  @ResponseBody ResponseEntity saveFeedback(@PathVariable Long id, @RequestParam String feedback, @RequestParam Long userId) {
 		Event event =  eventService.getEventById(id);
@@ -114,7 +125,7 @@ public class EventController {
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 
-	@GetMapping(value = "/{id}/allfeedback", produces = "application/json")
+	@GetMapping(value = "/{id}/feedback", produces = "application/json")
 	public  @ResponseBody List<Feedback> saveFeedback(@PathVariable Long id) {
 		return feedbackService.getEventFeedbacks(id);
 	}

@@ -56,9 +56,54 @@ class EventContainer extends React.Component {
         });
     }
 
-    handleBuyOrFavourite = (url) => {
+    handleBuy = (url) => {
         if (sessionStorage.getItem("user")) {
-            axios.get(url.href, {
+            axios({
+                method: 'post',
+                url: url.href,
+                params: {
+                    userId: sessionStorage.getItem("user")
+                },
+                headers: {'Content-Type': 'application/json;charset=utf-8'}
+            })
+            // axios.post(url.href, {
+            //     params: {
+            //         userId: sessionStorage.getItem("user")
+            //     }
+            // })
+                .then(()=>this.sendAxiosRequestForFavourites())
+        }
+        else {
+            this.props.history.push("/login")
+        }
+    }
+
+    handleFavouriteAdd = (url) => {
+        if (sessionStorage.getItem("user")) {
+            axios({
+                method: 'put',
+                url: url.href,
+                params: {
+                    userId: sessionStorage.getItem("user")
+                },
+                headers: {'Content-Type': 'application/json;charset=utf-8'}
+            })
+
+            // axios.put(url.href, {
+            //     params: {
+            //         userId: sessionStorage.getItem("user")
+            //     }
+           // })
+.then(()=>this.sendAxiosRequestForFavourites())
+        }
+        else {
+            this.props.history.push("/login")
+        }
+    }
+
+    handleFavouriteRemove = (url) => {
+        if (sessionStorage.getItem("user")) {
+            axios.delete(url.href, {
                 params: {
                     userId: sessionStorage.getItem("user")
                 }
@@ -68,7 +113,6 @@ class EventContainer extends React.Component {
             this.props.history.push("/login")
         }
     }
-
     updateToUserFavourite = (value) => {
         if (value == "true") {
             var id = sessionStorage.getItem("user");
@@ -88,7 +132,9 @@ class EventContainer extends React.Component {
                 <EventListComponent
                     key={index}
                     event={event}
-                    handleBuyOrFavourite={this.handleBuyOrFavourite}
+                    handleBuy={this.handleBuy}
+                    handleFavouriteAdd={this.handleFavouriteAdd}
+                    handleFavouriteRemove={this.handleFavouriteRemove}
                     userFavourites={this.state.userFavourites}
                 />
             );

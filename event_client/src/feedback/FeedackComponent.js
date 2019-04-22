@@ -7,8 +7,7 @@ export default class FeedbackComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            feedbackUrlPost: '',
-            feedbackUrlGet:'',
+            feedbackUrl: '',
             eventName:'',
             allFeedbacks:[],
             newFeedback: ''
@@ -18,7 +17,7 @@ export default class FeedbackComponent extends React.Component {
     sendAxiosRequestToPostFeedbacks = () => {
         axios({
             method: 'post',
-            url: this.state.feedbackUrlPost.href,
+            url: this.state.feedbackUrl.href,
             headers: { "Accept": "application/json"},
             params: {
                 feedback: this.state.newFeedback,
@@ -32,26 +31,22 @@ export default class FeedbackComponent extends React.Component {
     }
 
     sendAxiosRequestForAllFeedbacks = () => {
-        axios.get(this.state.feedbackUrlGet.href)
+        axios.get(this.state.feedbackUrl.href)
             .then(response => this.setState({
             allFeedbacks: response.data,
         }));
     }
 
     componentDidMount() {
-        const {urlForPostFeedback} = this.props.location.state;
-        const {urlForGetFeedback} = this.props.location.state;
+        const {urlForFeedback} = this.props.location.state;
         const {eventName} =  this.props.location.state;
         this.setState({
-                feedbackUrlPost: urlForPostFeedback,
-                feedbackUrlGet: urlForGetFeedback,
+                feedbackUrl: urlForFeedback,
                 eventName: eventName,
             }, () => {
                 this.sendAxiosRequestForAllFeedbacks()
             }
         );
-        console.log(urlForGetFeedback);
-        console.log(urlForPostFeedback);
     }
 
     saveFeedback  = (value) => {
