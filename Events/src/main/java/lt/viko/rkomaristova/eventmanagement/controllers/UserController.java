@@ -46,7 +46,7 @@ public class UserController {
 		return userService.checkLogin(username, password);
 	}
 	
-	@GetMapping(value = "/", produces = "application/json")
+	@GetMapping(value = "", produces = "application/json")
 	public  @ResponseBody List<User> findUsers() {
 		return userService.findAllUsers();
 	}

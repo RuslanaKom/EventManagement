@@ -1,4 +1,4 @@
-package lt.viko.rkomaristova.eventmanagemet.configs;
+package lt.viko.rkomaristova.eventmanagement.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

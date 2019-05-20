@@ -42,34 +42,19 @@ public class EventController {
 	TicketService ticketService;
 	
 	@Autowired
-	FeedbackService feedbackService;
-
-//	@GetMapping(value = "/events", produces = "application/json")
-//	public  @ResponseBody ResponseEntity<List<Event>> getEvents() {
-//		System.out.println(eventService.getAllEvents().get(0).getDescription());
-//		return ResponseEntity.status(HttpStatus.OK).body(eventService.getAllEvents());
-//	}	
+	FeedbackService feedbackService;	
 
 	@GetMapping(value = "/all", produces = "application/json")
 	public  @ResponseBody List<Event> getEvents() {
 		return eventService.getAllEvents();
 	}
 	
-//	@GetMapping(value = "/", produces = "application/json")
-//	public  @ResponseBody List<Event> getEventsByCriteria(@RequestParam (required = false) Optional<String> name,
-//															@RequestParam (required = false) Optional<String> city,
-//															@RequestParam (required = false) Optional<String> category,
-//															@RequestParam (required = false) Optional<Boolean> isFree) {
-//		return eventService.getEventsByCriteria(name.orElse(null), city.orElse(null), category.orElse(null), isFree.orElse(null));
-//	}
-	
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public  @ResponseBody Event getEventById(@PathVariable Long id) {
 		return  eventService.getEventById(id);
 	}
-
 	
-	@GetMapping(value = "/", produces = "application/hal+json")
+	@GetMapping(value = "", produces = "application/hal+json")
 	public @ResponseBody List<EventResource> getEventsByCriteria(@RequestParam(required = false) Optional<String> name,
 																@RequestParam(required = false) Optional<String> city,
 																@RequestParam(required = false) Optional<String> category,

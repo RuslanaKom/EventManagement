@@ -22,7 +22,7 @@ class EventContainer extends React.Component {
     }
 
     sendAxiosRequest = () => {
-        axios.get('/events/', {
+        axios.get('/events', {
             params: {
                 name: this.state.name,
                 city: this.state.city,
@@ -66,11 +66,6 @@ class EventContainer extends React.Component {
                 },
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             })
-            // axios.post(url.href, {
-            //     params: {
-            //         userId: sessionStorage.getItem("user")
-            //     }
-            // })
                 .then(()=>this.sendAxiosRequestForFavourites())
         }
         else {
@@ -89,11 +84,6 @@ class EventContainer extends React.Component {
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             })
 
-            // axios.put(url.href, {
-            //     params: {
-            //         userId: sessionStorage.getItem("user")
-            //     }
-           // })
 .then(()=>this.sendAxiosRequestForFavourites())
         }
         else {

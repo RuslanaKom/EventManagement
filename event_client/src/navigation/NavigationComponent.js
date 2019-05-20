@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import '../App.css';
+import { Link } from 'react-router-dom';
 
 class NavigationComponent extends React.Component {
     handleClick = () => {
@@ -13,25 +14,27 @@ class NavigationComponent extends React.Component {
         var loginlogout = "";
         if(!sessionStorage.getItem("user")) {
             loginlogout =   <Nav className="ml-auto">
-                    <Nav.Link href="/login" className="ml-auto">Prisijungti</Nav.Link>
+                    <Link to="/login" className="ml-auto">Prisijungti</Link>
                 </Nav>
         }
         else {
             loginlogout =   <Nav className="ml-auto">
-                <Nav.Link href='/events' onClick={this.handleClick} className="ml-auto">Atsijungti</Nav.Link>
+                <Link to='/events' onClick={this.handleClick} className="ml-auto">Atsijungti</Link>
             </Nav>;
 
-            manoBilietaiLink=<Nav.Link href="/tickets">Mano bilietai</Nav.Link>
+            manoBilietaiLink=<Link to="/tickets">Mano bilietai</Link>
         }
 
     return (
             <Navbar className="mynav" variant="dark">
-            <Navbar.Brand href="/events">Renginiai</Navbar.Brand>
-            <Nav className="mr-auto">
+                <Nav className="mr-auto">
+                    <Link to="/events">Renginiai</Link>
+                </Nav>
+                <Nav className="mr-auto">
                 {manoBilietaiLink}
-            </Nav>
+                </Nav>
                 {loginlogout}
-        </Navbar>
+            </Navbar>
         );
     }
 }

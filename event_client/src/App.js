@@ -18,12 +18,12 @@ class App extends Component {
             <div>
             <NavigationComponent/>
             <Switch>
-                <Route exact path="/events" component={EventContainer} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/userregistration" component={UserRegistration} />
-                <Route exact path="/eventDetails" component={EventDetailContainer} />
-                <Route exact path="/tickets" component={TicketListContainer} />
-                <Route exact path="/feedback" component={FeedbackComponent} />
+                <Route  path="/events" component={EventContainer} />
+                <Route  path="/login" component={Login} />
+                <Route  path="/userregistration" component={UserRegistration} />
+                <Route  path="/eventDetails" component={EventDetailContainer} />
+                <Route  path="/tickets" component={TicketListContainer} />
+                <Route  path="/feedback" component={FeedbackComponent} />
             </Switch>
             <Footer/>
             </div>
