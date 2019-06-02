@@ -15,11 +15,14 @@ D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkoma
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\entities\Event.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\daoImpl\FeedbackDaoImpl.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\dto\EventDto.java
+D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\security\MyAuthentificationSuccessHandler.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\controllers\EventController.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\enums\EventCategories.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\entities\User.java
+D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\security\SecurityWebInitializer.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\daoImpl\TicketDaoImpl.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\services\TicketService.java
+D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\security\WebSecurityConfig.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\enums\Cities.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\daoImpl\EventDaoImpl.java
 D:\Ruslana laptop\codingc\VIKO\4 semestras DB\Events\src\main\java\lt\viko\rkomaristova\eventmanagement\dto\UserRegistrationDto.java

@@ -42,10 +42,10 @@ public class UserDaoImpl implements UserDao {
 		return query.getResultList();
 	}
 
-	public List<UserDetails> findUserDetailsByUserName(String username) {
+	public UserDetails findUserDetailsByUserName(String username) {
 		Query query = em.createQuery(FIND_USERDETAILS_BY_USERNAME);
 		query.setParameter("username", username);
-		return query.getResultList();
+		return (UserDetails) query.getSingleResult();
 	}
 
 	public void deleteUserByLogin(String login) {

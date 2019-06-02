@@ -27,18 +27,26 @@ export default class Login extends React.Component {
     }
 
     axiosGetUserData() {
-        axios({
-            method:'get',
-            url:'/users/login',
-            params: {
-                username: this.state.username,
-                password: this.state.password
-            },
+        // axios({
+        //     method:'get',
+        //     //  url:'/users/login',
+        //     url:'/login',
+        //     params: {
+        //         username: this.state.username,
+        //         password: this.state.password
+        //     },
+            axios({
+                      method: 'post',
+                      url: '/login',
+                      params: {
+                          username: this.state.username,
+                          password: this.state.password
+                      },
             headers: {'Content-Type': 'application/json;charset=utf-8'}
         })
             .then((response) => {
                 this.setState({user: response.data});
-                console.log(this.state.user);
+                console.log(response.data);
                 if (this.state.user == null || this.state.user === '') {
                     alert('your password or username is incorrect!');
                 }

@@ -37,8 +37,13 @@ class EventContainer extends React.Component {
     }
 
     sendAxiosRequestForFavourites = () => {
-        var id = sessionStorage.getItem("user");
-        axios.get('/users/' + id + '/favourites')
+       // // var id = sessionStorage.getItem("user");
+       //  var id;
+       //  axios.get('/users/username')
+       //      .then(response => {id = response.data})
+       //      .then(
+       // axios.get('/users/' + id + '/favourites'))
+        axios.get('/users/favourites')
             .then(response => this.setState({
                 userFavourites: response.data,
             }))

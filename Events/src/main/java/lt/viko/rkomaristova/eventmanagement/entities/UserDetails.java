@@ -1,6 +1,8 @@
 package lt.viko.rkomaristova.eventmanagement.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,8 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 @Entity
-public class UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,6 +72,31 @@ public class UserDetails {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Collections.singletonList(new SimpleGrantedAuthority(role));
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	
 }
