@@ -14,7 +14,7 @@ import lt.viko.rkomaristova.eventmanagement.entities.Ticket;
 @Repository
 public class TicketDaoImpl implements TicketDao {
 	
-	private static final String FIND_TICKET_BY_USER_ID = "select t from Ticket t where t.user=(select u from User u where u.id=:userId)";
+	private static final String FIND_TICKET_BY_USER_ID = "select t from Ticket t where t.user=(select ud.user from UserDetails ud where ud.username =:username)";
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -23,9 +23,9 @@ public class TicketDaoImpl implements TicketDao {
 		return ticket;
 	}
 
-	public List<Ticket> findTicketsByUserId(Long userId){
+	public List<Ticket> findTicketsByUserId(String username){
 		Query query = em.createQuery(FIND_TICKET_BY_USER_ID);
-		query.setParameter("userId", userId);
+		query.setParameter("username", username);
 		return query.getResultList();
 	}
 }

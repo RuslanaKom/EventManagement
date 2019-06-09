@@ -20,6 +20,7 @@ import lt.viko.rkomaristova.eventmanagement.dao.EventDao;
 import lt.viko.rkomaristova.eventmanagement.entities.AgendaPoint;
 import lt.viko.rkomaristova.eventmanagement.entities.Event;
 
+
 @Repository
 public class EventDaoImpl implements EventDao {
 
@@ -30,8 +31,8 @@ public class EventDaoImpl implements EventDao {
 	private final String FIND_EVENT_BY_ID = "select e from Event e where e.id=:id";
 	private final String FIND_EVENT_WITH_DETAIL = "select e from Event e LEFT JOIN FETCH e.sponsors s where e.id=:eventId";
 	private final String FIND_AGENDA_BY_EVENT="select a from AgendaPoint a where a.event=:event";
-	private final String FIND_EVENTS_BY_USER="select u.favouriteEvents from User u  where u.id=:userId";
-	
+	//private final String FIND_EVENTS_BY_USER="select u.favouriteEvents from User u  where u.id=:userId";
+	private final String FIND_EVENTS_BY_USERNAME="select ud.user.favouriteEvents from UserDetails ud where ud.username =:username";
 	public void saveEvent(Event event) {
 		// TODO Auto-generated method stub
 	}
@@ -103,10 +104,17 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public List<Event> findUserFavouriteEvents (Long userId) {
-		Query query = em.createQuery(FIND_EVENTS_BY_USER);
-		query.setParameter("userId", userId);
+	public List<Event> findUserFavouriteEvents (String username) {
+		Query query = em.createQuery(FIND_EVENTS_BY_USERNAME);
+		query.setParameter("username", username);
 		return query.getResultList();
 	}
+	
+//	@Override
+//	public List<Event> findUserFavouriteEvents (Long userId) {
+//		Query query = em.createQuery(FIND_EVENTS_BY_USER);
+//		query.setParameter("userId", userId);
+//		return query.getResultList();
+//	}
 	
 }

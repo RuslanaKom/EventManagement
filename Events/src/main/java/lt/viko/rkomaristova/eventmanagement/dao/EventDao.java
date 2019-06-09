@@ -17,5 +17,6 @@ public interface EventDao {
 	List<Event> findEventByCriteria(String name, String city, String category, Boolean isFree, Boolean future);
 	List<Event> findEventWithDetails(Long eventId);
 	List<AgendaPoint> findAgendaByEvent(Event event);
-	List<Event> findUserFavouriteEvents(Long userId);
+	//List<Event> findUserFavouriteEvents(Long userId);
+	List<Event> findUserFavouriteEvents(String userName);
 }

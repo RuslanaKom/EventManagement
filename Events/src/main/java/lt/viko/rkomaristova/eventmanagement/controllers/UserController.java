@@ -30,18 +30,18 @@ import lt.viko.rkomaristova.eventmanagement.services.UserService;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	TicketService ticketService;
-	
+
 	@Autowired
 	EventService eventService;
-	
+
 	@PostMapping(value = "/register", produces = "application/json")
-	public  @ResponseBody boolean registerSimpleUser(@RequestBody UserRegistrationDto userDto) {
+	public @ResponseBody boolean registerSimpleUser(@RequestBody UserRegistrationDto userDto) {
 		return userService.saveNewUser(userDto);
 	}
 
@@ -49,41 +49,33 @@ public class UserController {
 //	public  @ResponseBody User loginUser(@RequestParam String username, @RequestParam String password) {
 //		return userService.checkLogin(username, password);
 //	}
-//	
+	
 	@GetMapping(value = "", produces = "application/json")
-	public  @ResponseBody List<User> findUsers() {
+	public @ResponseBody List<User> findUsers() {
 		return userService.findAllUsers();
 	}
-	
-	@GetMapping(value = "/id", produces = "application/json")
-	public  @ResponseBody List<User> findUserById (@RequestParam Long id){
+
+	@GetMapping(value = "/{id}", produces = "application/json")
+	public @ResponseBody List<User> findUserById(@PathVariable Long id) {
 		return userService.findUserById(id);
 	}
-	
-	@GetMapping(value = "/{id}/tickets", produces = "application/json")
-	public  @ResponseBody List<Ticket> findUserTickets (@PathVariable String id){
-		return ticketService.getTicketsByUser(Long.parseLong(id));
+
+	@GetMapping(value = "/tickets", produces = "application/json")
+	public @ResponseBody List<Ticket> findUserTickets(Principal principal) {
+		return ticketService.getTicketsByUser(principal.getName());
 	}
-	
-//	@GetMapping(value = "/{id}/favourites", produces = "application/hal+json")
-//	public  @ResponseBody List<EventResource> findUserFavouriteEvents (@PathVariable String id){
-//		List<Event> events = eventService.getUserFavouriteEvents(Long.parseLong(id));
-//		return events.stream().map(e -> new EventResource(e)).collect(Collectors.toList());
-//	}
-	
+
 	@GetMapping(value = "/favourites", produces = "application/hal+json")
-	public  @ResponseBody List<EventResource> findUserFavouriteEvents (Principal principal){
-		String username = principal.getName();
-		UserDetails user = (UserDetails) userService.loadUserByUsername(username);
-		List<Event> events = eventService.getUserFavouriteEvents(user.getUser().getId());
+	public @ResponseBody List<EventResource> findUserFavouriteEvents(Principal principal) {
+		List<Event> events = eventService.getUserFavouriteEvents(principal.getName());
 		return events.stream().map(e -> new EventResource(e)).collect(Collectors.toList());
 	}
 
 	@GetMapping(value = "/username", produces = "application/json")
 	public @ResponseBody String currentUserId(Principal principal) {
-	    String username =principal.getName();
-	    UserDetails user = (UserDetails) userService.loadUserByUsername(username);
-	    String id = user.getUser().getId().toString();
-        return id;
-	    }
+		String username = principal.getName();
+		UserDetails user = (UserDetails) userService.loadUserByUsername(username);
+		String id = user.getUser().getId().toString();
+		return id;
+	}
 }

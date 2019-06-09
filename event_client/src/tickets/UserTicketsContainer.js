@@ -11,8 +11,7 @@ export default class UserTicketsContainer extends React.Component {
         };
     }
     sendAxiosRequest = () => {
-        var id = sessionStorage.getItem("user")
-        axios.get('/users/'+id+'/tickets')
+        axios.get('/users/tickets')
             .then(response => this.setState({
                 tickets: response.data,
             }));

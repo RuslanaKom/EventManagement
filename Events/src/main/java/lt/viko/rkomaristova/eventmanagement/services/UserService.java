@@ -89,4 +89,13 @@ public class UserService implements UserDetailsService{
 			throw new UsernameNotFoundException(String.format("Username [%s] not found", username));
 		}
 	}
+
+	public User findUserByUsername(String username)
+			throws UsernameNotFoundException {
+		try {
+			return userDao.findUserByUserName(username);
+		} catch (NoResultException e) {
+			throw new UsernameNotFoundException(String.format("Username [%s] not found", username));
+		}
+	}
 }

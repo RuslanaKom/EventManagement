@@ -37,12 +37,6 @@ class EventContainer extends React.Component {
     }
 
     sendAxiosRequestForFavourites = () => {
-       // // var id = sessionStorage.getItem("user");
-       //  var id;
-       //  axios.get('/users/username')
-       //      .then(response => {id = response.data})
-       //      .then(
-       // axios.get('/users/' + id + '/favourites'))
         axios.get('/users/favourites')
             .then(response => this.setState({
                 userFavourites: response.data,
@@ -83,13 +77,9 @@ class EventContainer extends React.Component {
             axios({
                 method: 'put',
                 url: url.href,
-                params: {
-                    userId: sessionStorage.getItem("user")
-                },
                 headers: {'Content-Type': 'application/json;charset=utf-8'}
             })
-
-.then(()=>this.sendAxiosRequestForFavourites())
+        .then(()=>this.sendAxiosRequestForFavourites())
         }
         else {
             this.props.history.push("/login")
@@ -97,11 +87,8 @@ class EventContainer extends React.Component {
     }
 
     handleFavouriteRemove = (url) => {
-        if (sessionStorage.getItem("user")) {
+         if (sessionStorage.getItem("user")) {
             axios.delete(url.href, {
-                params: {
-                    userId: sessionStorage.getItem("user")
-                }
             }).then(()=>this.sendAxiosRequestForFavourites())
         }
         else {
@@ -111,7 +98,7 @@ class EventContainer extends React.Component {
     updateToUserFavourite = (value) => {
         if (value == "true") {
             var id = sessionStorage.getItem("user");
-            axios.get('/users/' + id + '/favourites')
+            axios.get('/users/favourites')
                 .then(response => this.setState({
                     events: response.data,
                 }))

@@ -1,5 +1,6 @@
 package lt.viko.rkomaristova.eventmanagement.controllers;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,26 +77,26 @@ public class EventController {
 	/*_________TICKET__________*/
 	
 	@PostMapping(value = "/{id}/buy", produces = "application/json")
-	public  @ResponseBody Ticket buyEventTicket(@PathVariable Long id, @RequestParam Long userId) {
+	public  @ResponseBody Ticket buyEventTicket(@PathVariable Long id, Principal principal) {
 		Event event =  eventService.getEventById(id);
-		User user = userService.findUserById(userId).get(0);
+		User user = userService.findUserByUsername(principal.getName());
 		return ticketService.buyTicket(event, user);
 	}
 	
 	 /*________FAVOURITES________*/
 	
 	@PutMapping(value = "/{id}/favourite", produces = "application/json")
-	public  @ResponseBody ResponseEntity saveEventToFavourite(@PathVariable Long id, @RequestParam Long userId) {
+	public  @ResponseBody ResponseEntity saveEventToFavourite(@PathVariable Long id, Principal principal) {
 		Event event =  eventService.getEventById(id);
-		User user = userService.findUserById(userId).get(0);
+		User user = userService.findUserByUsername(principal.getName());
 		userService.addEventToFavourites(user, event);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 	
 	@DeleteMapping(value = "/{id}/favourite", produces = "application/json")
-	public  @ResponseBody ResponseEntity deleteEventFromFavourite(@PathVariable Long id, @RequestParam Long userId) {
+	public  @ResponseBody ResponseEntity deleteEventFromFavourite(@PathVariable Long id, Principal principal) {
 		Event event =  eventService.getEventById(id);
-		User user = userService.findUserById(userId).get(0);
+		User user = userService.findUserByUsername(principal.getName());
 		userService.removeEventFromFavourites(user, event);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
@@ -103,9 +104,9 @@ public class EventController {
 	 /*_________FEEDBACK_________*/
 	
 	@PostMapping(value = "/{id}/feedback", produces = "application/json")
-	public  @ResponseBody ResponseEntity saveFeedback(@PathVariable Long id, @RequestParam String feedback, @RequestParam Long userId) {
+	public  @ResponseBody ResponseEntity saveFeedback(@PathVariable Long id, @RequestParam String feedback, Principal principal) {
 		Event event =  eventService.getEventById(id);
-		User user = userService.findUserById(userId).get(0);
+		User user = userService.findUserByUsername(principal.getName());
 		feedbackService.saveFeedback(user, event, feedback);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}

@@ -23,8 +23,7 @@ public class TicketService {
 		return ticketDao.saveTicket(ticket);
 	}
 
-	public List<Ticket> getTicketsByUser(Long userId){
-		return ticketDao.findTicketsByUserId(userId);
+	public List<Ticket> getTicketsByUser(String username){
+		return ticketDao.findTicketsByUserId(username);
 	}
-	
 }

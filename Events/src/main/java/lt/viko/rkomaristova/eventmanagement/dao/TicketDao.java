@@ -7,5 +7,5 @@ import lt.viko.rkomaristova.eventmanagement.entities.Ticket;
 public interface TicketDao {
 	
 	Ticket saveTicket(Ticket ticket);
-	List<Ticket> findTicketsByUserId(Long userId);
+	List<Ticket> findTicketsByUserId(String username);
 }

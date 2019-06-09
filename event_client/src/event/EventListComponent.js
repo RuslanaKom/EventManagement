@@ -80,7 +80,6 @@ const EventLineComponent = (props) => {
         buttonBuyDiv = <p/>
         priceDiv = <p/>;
         favouriteButton = <p/>
-  //      if (sessionStorage.getItem("user")) {
             feedbackDiv = <Link to={{
                 pathname: '/feedback',
                 state: {
@@ -88,7 +87,6 @@ const EventLineComponent = (props) => {
                     eventName: props.event.event.name
                 }
             }}>Atsiliepimai</Link>
-  //      }
     }
 
     return (

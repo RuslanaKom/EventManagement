@@ -29,8 +29,8 @@ insert into user_details values (404, '$2a$10$hOrBOKPBbxH4Jtj37FS/gO2JsYlfo8lyLQ
 insert into user_details values (405, '$2a$10$CiHxFJnKe7CWHeojUWGQde6U9ppxQqVeng6Obr.vNRfrt67jiS/2O', 'LECTURER', 'darius', 306);
 insert into user_details values (406, '$2a$10$8MPi6NDQayInV0LH17JIget.n5W.B3uUYW5.P2huDmxaYcsfD6KBe', 'LECTURER','evelina', 307);
 
-insert into event values (501, 5, 'Paroda', 'Vilnius', 'Interaktyvių robotų paroda patiks ir vaikams ir jų tėvams', '2019-05-01', FALSE, 'Robotų paroda', '2019-05-30');
-insert into event values (502, 0, 'Šventė', 'Klaipėda', 'Linksma miesto šventė visai šeimai', '2019-06-05', TRUE, 'Jūros šventė', '2019-06-05');
+insert into event values (501, 5, 'Paroda', 'Vilnius', 'Interaktyvių robotų paroda patiks ir vaikams ir jų tėvams', '2019-07-01', FALSE, 'Robotų paroda', '2019-07-30');
+insert into event values (502, 0, 'Šventė', 'Klaipėda', 'Linksma miesto šventė visai šeimai', '2019-08-05', TRUE, 'Jūros šventė', '2019-08-05');
 insert into event values (503, 0, 'Šventė', 'Vilnius', 'Koncertai po atviru dangumi visą naktį', '2019-07-12', TRUE, 'Muzikos naktis', '2019-07-12');
 insert into event values (504, 10, 'Mokymai', 'Vilnius', 'Paskaitos apie programavimą', '2019-07-11', FALSE, 'Clean Code konferencija', '2019-07-10');
 insert into event values (505, 25, 'Mokymai', 'Vilnius', 'Workshop for Docker practices', '2019-01-15', FALSE, 'Docker - why do we need it', '2019-01-15');

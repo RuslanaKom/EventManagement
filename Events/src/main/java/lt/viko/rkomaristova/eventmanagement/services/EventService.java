@@ -57,7 +57,7 @@ public class EventService {
 		return new EventDto(event, agenda);
 	}
 	
-	public List<Event> getUserFavouriteEvents(Long userId) {
-		return eventDao.findUserFavouriteEvents(userId);
+	public List<Event> getUserFavouriteEvents(String username) {
+		return eventDao.findUserFavouriteEvents(username);
 	}
 }
