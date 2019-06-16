@@ -27,6 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private MyAuthentificationSuccessHandler successHandler;
 	
+	@Autowired
+	private MyAuthentificationErrorHandler errorHandler;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
 		builder.userDetailsService(userService).passwordEncoder(passwordEncoder);
@@ -47,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin()
 		.successHandler(successHandler)
+		.failureHandler(errorHandler)
 		//.defaultSuccessUrl("/events", true)
 		.and()
         .logout()

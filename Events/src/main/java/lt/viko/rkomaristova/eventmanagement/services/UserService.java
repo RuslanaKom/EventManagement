@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +33,7 @@ public class UserService implements UserDetailsService{
 		try {
 		userDao.findUserDetailsByUserName(userDto.getUsername());
 		}
-		catch(NoResultException e){
+		catch(EmptyResultDataAccessException e){
 		User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getPhone(), userDto.getEmail());
 		User savedUser = userDao.saveUser(user);
 		UserDetails userDetails = new UserDetails(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()));

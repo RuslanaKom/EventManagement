@@ -27,14 +27,6 @@ export default class Login extends React.Component {
     }
 
     axiosGetUserData() {
-        // axios({
-        //     method:'get',
-        //     //  url:'/users/login',
-        //     url:'/login',
-        //     params: {
-        //         username: this.state.username,
-        //         password: this.state.password
-        //     },
             axios({
                       method: 'post',
                       url: '/login',
@@ -45,18 +37,24 @@ export default class Login extends React.Component {
             headers: {'Content-Type': 'application/json;charset=utf-8'}
         })
             .then((response) => {
-                this.setState({user: response.data});
-                console.log(response.data);
-                if (this.state.user == null || this.state.user === '') {
-                    alert('your password or username is incorrect!');
+                console.log(response.status);
+                if(response.status=='401'){
+                    this.setState({user: null});
                 }
                 else {
+                    this.setState({user: response.data});
+               // }
+                // if (this.state.user == null || this.state.user === '') {
+                //
+                // }
+              //  else {
                     sessionStorage.setItem('user', JSON.stringify(this.state.user.id));
                     this.setState({redirect: true})
                     console.log(this.state.user);
                 }
             })
             .catch((error) => {
+                alert('your password or username is incorrect!');
                 console.log(error);
             });
     }
