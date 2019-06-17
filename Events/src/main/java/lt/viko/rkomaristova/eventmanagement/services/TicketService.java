@@ -15,15 +15,18 @@ import lt.viko.rkomaristova.eventmanagement.entities.User;
 public class TicketService {
 
 	@Autowired
-	TicketDao ticketDao;
-	
+	private TicketDao ticketDao;
+
 	@Transactional
 	public Ticket buyTicket(Event event, User user) {
-		Ticket ticket = new Ticket(event, event.getBasicPrice(),user);
-		return ticketDao.saveTicket(ticket);
+		if (Boolean.compare(event.getIsFree(), false) == 0) {
+			Ticket ticket = new Ticket(event, event.getBasicPrice(), user);
+			return ticketDao.saveTicket(ticket);
+		}
+		throw new IllegalArgumentException("Cannot buy ticket for free event");
 	}
 
-	public List<Ticket> getTicketsByUser(String username){
+	public List<Ticket> getTicketsByUser(String username) {
 		return ticketDao.findTicketsByUserId(username);
 	}
 }
